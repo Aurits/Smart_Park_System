@@ -68,6 +68,13 @@ void displayWelcome()
 		PORTH = message[i];
 		lunch();
 	}
+		_delay_ms(1500);
+		clearScreen();
+}
+//function to always clear the screen of the LCD
+void clearScreen(){
+	PORTH = 0x01;
+	lunch();
 }
 // do the interrupt service run tine for INT0
 ISR(INT3_vect)
@@ -75,4 +82,5 @@ ISR(INT3_vect)
 	PORTC ^= (1 << 3); // activate the led on an interrupt
 	_delay_ms(50);	   // Delay to denounce the button (if needed)
 	displayWelcome();  // Call the function to display the welcome message
+
 }
