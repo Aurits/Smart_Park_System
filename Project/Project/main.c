@@ -98,11 +98,59 @@ int main(void)
 		}
 
 		// keypadFridge
-		PORTB &= ~(1 << 5); // set column 1 to 0
+		PORTB &= ~(1 << 5);				// set column 1 to 0
+		if ((PINB & 0b000010000) == 00) // check if row 1 is 1
+		{
+			PORTB = (1 << 0); // display 1
+		}
+		else if ((PINB & 0b00001000) == 00)
+		{
+			PORTB = (1 << 0); // display 4
+		}
+		else if ((PINB & 0b00000100) == 00)
+		{
+			PORTB = (1 << 0); // display 7
+		}
+		else if ((PINB & 0b00000010) == 00)
+		{
+			PORTB = (1 << 0); // display *
+		}
 
-		PORTB &= ~(1 << 6); // set column 2 to 0
+		PORTB &= ~(1 << 6);				// set column 2 to 0
+		if ((PINB & 0b000010000) == 00) // check if row 1 is 1
+		{
+			PORTB = (1 << 0); // display 2
+		}
+		else if ((PINB & 0b00001000) == 00)
+		{
+			PORTB = (1 << 0); // display 5
+		}
+		else if ((PINB & 0b00000100) == 00)
+		{
+			PORTB = (1 << 0); // display 8
+		}
+		else if ((PINB & 0b00000010) == 00)
+		{
+			PORTB = (1 << 0); // display 0
+		}
 
-		PORTB &= ~(1 << 7); // set column 3 to 0
+		PORTB &= ~(1 << 7);				// set column 3 to 0
+		if ((PINB & 0b000010000) == 00) // check if row 1 is 1
+		{
+			PORTB = (1 << 0); // display 3
+		}
+		else if ((PINB & 0b00001000) == 00)
+		{
+			PORTB = (1 << 0); // display 6
+		}
+		else if ((PINB & 0b00000100) == 00)
+		{
+			PORTB = (1 << 0); // display 9
+		}
+		else if ((PINB & 0b00000010) == 00)
+		{
+			PORTB = (1 << 0); // display #
+		}
 
 		// rotateFridge();
 		rotateFridge();
