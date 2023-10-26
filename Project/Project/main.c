@@ -34,29 +34,9 @@ int main(void)
 		lunch();
 		PORTH = 0x0f;
 		lunch();
-		PORTH = 0x3f;
-		lunch();
 
 		// the loop to display the welcome message
-		displayWelcome();
 	}
-}
-
-void displayWelcome()
-{
-	// the loop to display the welcome message
-	for (int i = 0; i < 17; i++)
-	{
-		dataMode();
-		PORTH = message[i];
-		lunch();
-	}
-}
-// do the interrupt service run tine for INT0
-ISR(INT3_vect)
-{
-	PORTC ^= (1 << 3); // activate the led on an interrupt
-					   // displayWelcome();
 }
 
 // function to write to the LCD
@@ -67,17 +47,32 @@ void lunch()
 	PORTG &= ~(1 << 2);
 	_delay_ms(1);
 }
-
 // function for LCD data mode
 void dataMode()
 {
 	PORTG |= (1 << 0);	// set rs to 1- data mode
 	PORTG &= ~(1 << 1); // set rw to 0- write mode
 }
-
 // function for LCD command mode
 void commandMode()
 {
 	PORTG &= ~(1 << 0); // set rs to 0- command mode
 	PORTG &= ~(1 << 1); // set rw to 0- write mode
+}
+void displayWelcome()
+{
+	// the loop to display the welcome message
+	for (int i = 0; i < 18; i++)
+	{
+		dataMode();
+		PORTH = message[i];
+		lunch();
+	}
+}
+// do the interrupt service run tine for INT0
+ISR(INT3_vect)
+{
+	PORTC ^= (1 << 3); // activate the led on an interrupt
+	_delay_ms(50);	   // Delay to denounce the button (if needed)
+	displayWelcome();  // Call the function to display the welcome message
 }
