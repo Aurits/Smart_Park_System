@@ -18,15 +18,22 @@ int main(void)
 {
 
 	// setting up the button and interrupt
-	DDRC |= (1 << 3);	  // setting 1 for output of the button when it does an interrupt
+	DDRB |= (1 << 0);	  // setting 1 for output of the button when it does an interrupt
 	DDRD &= ~(1 << 0);	  // setting 0 for input of the button
 	EICRA |= (1 << INT3); // Set for falling edge triggering
 	EIMSK |= (1 << INT3); // Enable INT0
 	sei();				  // enable external interrupts globally
 
 	// setup the LCD
-	DDRG = 0xFF; // set all pins on port C to output
-	DDRH = 0xFF; // set all pins on port D to output
+	DDRG = 0xFF; // set all pins on port G to output
+	DDRH = 0xFF; // set all pins on port H to output
+
+	// setting up motor
+	DDRJ = 0xFF; // set all pins on port J to output
+
+	// keypads DDR setup
+	DDRA = 0b11110000;
+	DDRB = 0b11110001;
 
 	while (1)
 	{
@@ -35,7 +42,70 @@ int main(void)
 		PORTH = 0x0f;
 		lunch();
 
-		// the loop to display the welcome message
+		// keypadGate
+		PORTA &= ~(1 << 4);			   // set column 1 to 0
+		if ((PINA & 0b00001000) == 00) // check if row 1 is 1
+		{
+			PORTB = (1 << 0); // display 1
+		}
+		else if ((PINA & 0b00000100) == 00)
+		{
+			PORTB = (1 << 0); // display 4
+		}
+		else if ((PINA & 0b00000010) == 00)
+		{
+			PORTB = (1 << 0); // display 7
+		}
+		else if ((PINA & 0b00000001) == 00)
+		{
+			PORTB = (1 << 0); // display *
+		}
+
+		PORTA &= ~(1 << 5);			   // set column 2 to 0
+		if ((PINA & 0b00001000) == 00) // check if row 1 is 1
+		{
+			PORTB = (1 << 0); // display 2
+		}
+		else if ((PINA & 0b00000100) == 00)
+		{
+			PORTB = (1 << 0); // display 5
+		}
+		else if ((PINA & 0b00000010) == 00)
+		{
+			PORTB = (1 << 0); // display 8
+		}
+		else if ((PINA & 0b00000001) == 00)
+		{
+			PORTB = (1 << 0); // display 0
+		}
+
+		PORTA &= ~(1 << 6);			   // set column 3 to 0
+		if ((PINA & 0b00001000) == 00) // check if row 1 is 1
+		{
+			PORTB = (1 << 0); // display 3
+		}
+		else if ((PINA & 0b00000100) == 00)
+		{
+			PORTB = (1 << 0); // display 6
+		}
+		else if ((PINA & 0b00000010) == 00)
+		{
+			PORTB = (1 << 0); // display 9
+		}
+		else if ((PINA & 0b00000001) == 00)
+		{
+			PORTB = (1 << 0); // display #
+		}
+
+		// keypadFridge
+		PORTB &= ~(1 << 5); // set column 1 to 0
+
+		PORTB &= ~(1 << 6); // set column 2 to 0
+
+		PORTB &= ~(1 << 7); // set column 3 to 0
+
+		// rotateFridge();
+		rotateFridge();
 	}
 }
 
@@ -68,19 +138,29 @@ void displayWelcome()
 		PORTH = message[i];
 		lunch();
 	}
-		_delay_ms(1500);
-		clearScreen();
+	_delay_ms(1500);
+	clearScreen();
 }
-//function to always clear the screen of the LCD
-void clearScreen(){
+
+// function to rotate the motor
+void rotateFridge()
+{
+	PORTJ = 0b00000010; // do rotate clockwise
+	_delay_ms(1000);
+	PORTJ = 0b00000001; // do rotate anti clockwise
+	_delay_ms(1000);
+}
+// function to always clear the screen of the LCD
+void clearScreen()
+{
 	PORTH = 0x01;
 	lunch();
 }
+
 // do the interrupt service run tine for INT0
 ISR(INT3_vect)
 {
-	PORTC ^= (1 << 3); // activate the led on an interrupt
-	_delay_ms(50);	   // Delay to denounce the button (if needed)
-	displayWelcome();  // Call the function to display the welcome message
-
+	// PORTB ^= (1 << 0); // activate the led on an interrupt
+	_delay_ms(50);	  // Delay to denounce the button (if needed)
+	displayWelcome(); // Call the function to display the welcome message
 }
