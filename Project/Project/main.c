@@ -209,25 +209,21 @@ void registration()
 	// the loop to do car registration
 	registerCar();
 	_delay_ms(1500);
-	// registerAdults();
+	registerAdults();
 	_delay_ms(1500);
-	// registerChildren();
+	registerChildren();
 	_delay_ms(1500);
 }
 
 // function to do car registration
 void registerCar()
 {
-	int i;
 
-	i = 0;
-
-	while (numberplate[i] != '\0')
+	for (int i = 0; i < 20; i++)
 	{
 		dataMode();
 		PORTH = numberplate[i];
 		lunch();
-		i++;
 	}
 
 	// capture the number plate from the keypad
