@@ -16,8 +16,7 @@ unsigned char message[] = "Hello new tourist!";
 
 int keypadGate()
 {
-	PORTA = 0b11110111;				 // set column 1 to 0
-	PINA |= (1 << 4);				 // set column 1 to 1
+	PORTA = 0b11110111;				 // set column 1 to 0			 // set column 1 to 1
 	if ((PINA & 0b00001000) == 0x00) // check if row 1 is 1
 	{
 		return 1; // display 1
