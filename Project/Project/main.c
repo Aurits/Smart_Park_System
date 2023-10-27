@@ -16,9 +16,10 @@ unsigned char message[] = "Hello new tourist!";
 
 int keypadGate()
 {
-	PORTA = 0b11110111;				 // set column 1 to 0			 // set column 1 to 1
+	PORTA &= ~(1 << 4);				 // set column 1 to 0
 	if ((PINA & 0b00001000) == 0x00) // check if row 1 is 1
 	{
+		PORTB = (1 << 0);
 		return 1; // display 1
 		_delay_ms(50);
 	}
@@ -166,6 +167,9 @@ int main(void)
 	// keypads DDR setup
 	DDRA = 0b11110000;
 	DDRB = 0b11110001;
+
+	// setting up the buzzer
+	DDRE |= (1 << 0);
 
 	while (1)
 	{
@@ -320,9 +324,13 @@ void clearScreen()
 // do the interrupt service run tine for INT0
 ISR(INT3_vect)
 {
-	PORTB ^= (1 << 0); // activate the led on an interrupt
+	// PORTB ^= (1 << 0); // activate the led on an interrupt
+
+	displayWelcome(); // Call the function to display the welcome message
+	PORTE |= (1 << 0);
+	_delay_ms(2000);
+	PORTE &= ~(1 << 0);
 	_delay_ms(1000);
-	displayWelcome(); // Call the function to display the welcome messagel
 }
 
 ISR(INT2_vect)
