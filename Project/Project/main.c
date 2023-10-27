@@ -13,66 +13,132 @@
 #define enable
 #define dataline
 unsigned char message[] = "Hello new tourist!";
-unsigned char numberplate[] = "Put the NumberPlate";
-
-unsigned char numberAdults[] = "Enter number of adults";
-unsigned char numberChildren[] = "Enter number of children";
-int flag = 0;
 
 int keypadGate()
 {
-	PORTA &= ~(1 << 4);			   // set column 1 to 0
-	if ((PINA & 0b00001000) == 00) // check if row 1 is 1
+	PORTA = 0b11110111;				 // set column 1 to 0
+	PINA |= (1 << 4);				 // set column 1 to 1
+	if ((PINA & 0b00001000) == 0x00) // check if row 1 is 1
 	{
 		return 1; // display 1
+		_delay_ms(50);
 	}
-	else if ((PINA & 0b00000100) == 00)
+	else if ((PINA & 0b00000100) == 0x00)
 	{
 		return 4; // display 4
+		_delay_ms(50);
 	}
-	else if ((PINA & 0b00000010) == 00)
+	else if ((PINA & 0b00000010) == 0x00)
 	{
 		return 7; // display 7
+		_delay_ms(50);
 	}
-	else if ((PINA & 0b00000001) == 00)
+	else if ((PINA & 0b00000001) == 0x00)
 	{
 		return 200; // display *
 	}
 
-	PORTA &= ~(1 << 5);			   // set column 2 to 0
-	if ((PINA & 0b00001000) == 00) // check if row 1 is 1
+	PORTA &= ~(1 << 5);				 // set column 2 to 0
+	if ((PINA & 0b00001000) == 0x00) // check if row 1 is 1
 	{
 		return 2; // display 2
+		_delay_ms(50);
 	}
-	else if ((PINA & 0b00000100) == 00)
+	else if ((PINA & 0b00000100) == 0x00)
 	{
 		return 5; // display 5
+		_delay_ms(50);
 	}
-	else if ((PINA & 0b00000010) == 00)
+	else if ((PINA & 0b00000010) == 0x00)
 	{
 		return 8; // display 8
+		_delay_ms(50);
 	}
-	else if ((PINA & 0b00000001) == 00)
+	else if ((PINA & 0b00000001) == 0x00)
 	{
 		return 0; // display 0
+		_delay_ms(50);
 	}
 
-	PORTA &= ~(1 << 6);			   // set column 3 to 0
-	if ((PINA & 0b00001000) == 00) // check if row 1 is 1
+	PORTA &= ~(1 << 6);				 // set column 3 to 0
+	if ((PINA & 0b00001000) == 0x00) // check if row 1 is 1
 	{
 		return 3; // display 3
+		_delay_ms(50);
 	}
-	else if ((PINA & 0b00000100) == 00)
+	else if ((PINA & 0b00000100) == 0x00)
 	{
 		return 6; // display 6
+		_delay_ms(50);
 	}
-	else if ((PINA & 0b00000010) == 00)
+	else if ((PINA & 0b00000010) == 0x00)
 	{
 		return 9; // display 9
+		_delay_ms(50);
 	}
-	else if ((PINA & 0b00000001) == 00)
+	else if ((PINA & 0b00000001) == 0x00)
 	{
 		return 100; // display #
+	}
+
+	return 2000;
+	_delay_ms(50);
+}
+
+int kepadFridge()
+{
+	PORTB &= ~(1 << 5);				// set column 1 to 0
+	if ((PINB & 0b000010000) == 00) // check if row 1 is 1
+	{
+		PORTB = (1 << 0); // display 1
+	}
+	else if ((PINB & 0b00001000) == 00)
+	{
+		PORTB = (1 << 0); // display 4
+	}
+	else if ((PINB & 0b00000100) == 00)
+	{
+		PORTB = (1 << 0); // display 7
+	}
+	else if ((PINB & 0b00000010) == 00)
+	{
+		PORTB = (1 << 0); // display *
+	}
+
+	PORTB &= ~(1 << 6);				// set column 2 to 0
+	if ((PINB & 0b000010000) == 00) // check if row 1 is 1
+	{
+		PORTB = (1 << 0); // display 2
+	}
+	else if ((PINB & 0b00001000) == 00)
+	{
+		PORTB = (1 << 0); // display 5
+	}
+	else if ((PINB & 0b00000100) == 00)
+	{
+		PORTB = (1 << 0); // display 8
+	}
+	else if ((PINB & 0b00000010) == 00)
+	{
+		PORTB = (1 << 0); // display 0
+	}
+
+	PORTB &= ~(1 << 7);				// set column 3 to 0
+	if ((PINB & 0b000010000) == 00) // check if row 1 is 1
+	{
+		PORTB = (1 << 0); // display 3
+	}
+	else if ((PINB & 0b00001000) == 00)
+	{
+		PORTB = (1 << 0); // display 6
+	}
+	else if ((PINB & 0b00000100) == 00)
+	{
+		PORTB = (1 << 0); // display 9
+	}
+	else if ((PINB & 0b00000010) == 00)
+	{
+		PORTB = (1 << 0); // display #
 	}
 }
 
@@ -104,67 +170,10 @@ int main(void)
 
 	while (1)
 	{
-		commandMode();
-		lunch();
-		PORTH = 0x0f;
-		lunch();
 
 		// keypadGate
 
 		// keypadFridge
-		PORTB &= ~(1 << 5);				// set column 1 to 0
-		if ((PINB & 0b000010000) == 00) // check if row 1 is 1
-		{
-			PORTB = (1 << 0); // display 1
-		}
-		else if ((PINB & 0b00001000) == 00)
-		{
-			PORTB = (1 << 0); // display 4
-		}
-		else if ((PINB & 0b00000100) == 00)
-		{
-			PORTB = (1 << 0); // display 7
-		}
-		else if ((PINB & 0b00000010) == 00)
-		{
-			PORTB = (1 << 0); // display *
-		}
-
-		PORTB &= ~(1 << 6);				// set column 2 to 0
-		if ((PINB & 0b000010000) == 00) // check if row 1 is 1
-		{
-			PORTB = (1 << 0); // display 2
-		}
-		else if ((PINB & 0b00001000) == 00)
-		{
-			PORTB = (1 << 0); // display 5
-		}
-		else if ((PINB & 0b00000100) == 00)
-		{
-			PORTB = (1 << 0); // display 8
-		}
-		else if ((PINB & 0b00000010) == 00)
-		{
-			PORTB = (1 << 0); // display 0
-		}
-
-		PORTB &= ~(1 << 7);				// set column 3 to 0
-		if ((PINB & 0b000010000) == 00) // check if row 1 is 1
-		{
-			PORTB = (1 << 0); // display 3
-		}
-		else if ((PINB & 0b00001000) == 00)
-		{
-			PORTB = (1 << 0); // display 6
-		}
-		else if ((PINB & 0b00000100) == 00)
-		{
-			PORTB = (1 << 0); // display 9
-		}
-		else if ((PINB & 0b00000010) == 00)
-		{
-			PORTB = (1 << 0); // display #
-		}
 
 		// rotateFridge();
 		rotateFridge();
@@ -175,9 +184,9 @@ int main(void)
 void lunch()
 {
 	PORTG |= (1 << 2); // set enable to 1
-	_delay_ms(1);	   // wait 1ms
+	_delay_ms(50);	   // wait 1ms
 	PORTG &= ~(1 << 2);
-	_delay_ms(1);
+	_delay_ms(50);
 }
 // function for LCD data mode
 void dataMode()
@@ -193,6 +202,11 @@ void commandMode()
 }
 void displayWelcome()
 {
+
+	commandMode();
+	lunch();
+	PORTH = 0x0f;
+	lunch();
 	// the loop to display the welcome message
 	for (int i = 0; i < 18; i++)
 	{
@@ -204,40 +218,89 @@ void displayWelcome()
 	clearScreen();
 }
 
+void lcd_data_print(char info[])
+{
+	int len = strlen(info);
+	for (int a = 0; a < len; a++)
+	{
+		lcd_data(info[a]);
+	}
+}
+
+void lcd_init()
+{
+	lcd_cmd(0x38); // all lines and a 5x7 matrix
+	lcd_cmd(0x0c); // display on, cursor off
+	lcd_cmd(0x06); // increment cursor
+	lcd_cmd(0x01); // clear screen
+}
+
+void lcd_cmd(unsigned char cmd)
+{
+	PORTH = cmd;
+	PORTG &= ~(1 << 0); // set rs to 0- command mode
+	PORTG &= ~(1 << 1); // set rw to 0- write mode
+	lunch();
+}
+
+void lcd_data(unsigned char data)
+{
+	PORTH = data;
+	PORTG |= (1 << 0);	// set rs to 1- data mode
+	PORTG &= ~(1 << 1); // set rw to 0- write mode
+	lunch();
+}
 // function to do car registration
 void registerCar()
 {
 
-	for (int i = 0; i < 20; i++)
+	lcd_init();
+	lcd_cmd(0x01); // clear screen
+	lcd_cmd(0x80); // row 1
+	lcd_data_print("REGISTRATION");
+	lunch();
+	// enter number plate
+	lcd_cmd(0xC0); // row 2
+	lcd_data_print("Number Plate: ");
+	int plate = keypadGate();
+	while (plate == 2000)
 	{
-		dataMode();
-		PORTH = numberplate[i];
-		lunch();
+		plate = keypadGate();
 	}
-
-	// capture the number plate from the keypad
-	int numberPlate = keypadGate();
-	// display the number plate on the LCD
+	char plates[1];
+	sprintf(plates, "%d", plate);
+	lcd_cmd(0xCD);
+	lcd_data_print(plates);
+	lunch();
 }
 // function to do adult registration
 void registerAdults()
 {
-	for (int i = 0; i < 24; i++)
+	lcd_cmd(0x94); // row 3
+	lcd_data_print("10 years below: ");
+	int belowTen = keypadGate();
+	while (belowTen == 200)
 	{
-
-		dataMode();
-		PORTH = numberAdults[i];
-		lunch();
+		belowTen = keypadGate();
 	}
+	char belowTens[1];
+	sprintf(belowTens, "%d", belowTen);
+	lcd_cmd(0xA4);
+	lcd_data_print(belowTens);
 }
 void registerChildren()
 {
-	for (int i = 0; i < 26; i++)
+	lcd_cmd(0xD4); // row
+	lcd_data_print("10 years above: ");
+	int aboveTen = keypadGate();
+	while (aboveTen == 200)
 	{
-		dataMode();
-		PORTH = numberChildren[i];
-		lunch();
+		aboveTen = keypadGate();
 	}
+	char aboveTens[1];
+	sprintf(aboveTens, "%d", aboveTens);
+	lcd_cmd(0xE4);
+	lcd_data_print(aboveTens);
 }
 
 // function to rotate the motor
@@ -266,4 +329,8 @@ ISR(INT3_vect)
 ISR(INT2_vect)
 {
 	registerCar();
+	_delay_ms(1000);
+	registerAdults();
+	_delay_ms(1000);
+	registerChildren();
 }
