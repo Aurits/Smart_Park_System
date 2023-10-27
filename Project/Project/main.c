@@ -13,7 +13,7 @@
 #define enable
 #define dataline
 unsigned char message[] = "Hello new tourist!";
-unsigned char numberplate[] = "Enter your number plate";
+unsigned char numberplate[] = "Put the NumberPlate";
 
 unsigned char numberAdults[] = "Enter number of adults";
 unsigned char numberChildren[] = "Enter number of children";
