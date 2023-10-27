@@ -204,22 +204,11 @@ void displayWelcome()
 	clearScreen();
 }
 
-void registration()
-{
-	// the loop to do car registration
-	registerCar();
-	_delay_ms(1500);
-	registerAdults();
-	_delay_ms(1500);
-	registerChildren();
-	_delay_ms(1500);
-}
-
 // function to do car registration
 void registerCar()
 {
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 22; i++)
 	{
 		dataMode();
 		PORTH = numberplate[i];
@@ -229,10 +218,6 @@ void registerCar()
 	// capture the number plate from the keypad
 	int numberPlate = keypadGate();
 	// display the number plate on the LCD
-	commandMode();
-	clearScreen();
-	dataMode();
-	PORTH = "W";
 }
 // function to do adult registration
 void registerAdults()
@@ -280,5 +265,5 @@ ISR(INT3_vect)
 
 ISR(INT2_vect)
 {
-	registration();
+	registerCar();
 }

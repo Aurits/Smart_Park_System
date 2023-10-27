@@ -3,29 +3,29 @@ Project.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         0000002e  00800200  00000464  000004d8  2**0
+  0 .data         0000002c  00800200  00000450  000004c4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000464  00000000  00000000  00000074  2**1
+  1 .text         00000450  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  00000506  2**0
+  2 .comment      00000030  00000000  00000000  000004f0  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000538  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000520  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000088  00000000  00000000  00000578  2**0
+  4 .debug_aranges 00000088  00000000  00000000  00000560  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000011e7  00000000  00000000  00000600  2**0
+  5 .debug_info   000011c6  00000000  00000000  000005e8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000cf9  00000000  00000000  000017e7  2**0
+  6 .debug_abbrev 00000cf9  00000000  00000000  000017ae  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000074d  00000000  00000000  000024e0  2**0
+  7 .debug_line   00000745  00000000  00000000  000024a7  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000001b4  00000000  00000000  00002c30  2**2
+  8 .debug_frame  000001b4  00000000  00000000  00002bec  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000667  00000000  00000000  00002de4  2**0
+  9 .debug_str    00000667  00000000  00000000  00002da0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000051e  00000000  00000000  0000344b  2**0
+ 10 .debug_loc    0000051e  00000000  00000000  00003407  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000078  00000000  00000000  00003969  2**0
+ 11 .debug_ranges 00000078  00000000  00000000  00003925  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -37,9 +37,9 @@ Disassembly of section .text:
    6:	00 00       	nop
    8:	8c c0       	rjmp	.+280    	; 0x122 <__bad_interrupt>
    a:	00 00       	nop
-   c:	02 c2       	rjmp	.+1028   	; 0x412 <__vector_3>
+   c:	f8 c1       	rjmp	.+1008   	; 0x3fe <__vector_3>
    e:	00 00       	nop
-  10:	d4 c1       	rjmp	.+936    	; 0x3ba <__vector_4>
+  10:	ca c1       	rjmp	.+916    	; 0x3a6 <__vector_4>
   12:	00 00       	nop
   14:	86 c0       	rjmp	.+268    	; 0x122 <__bad_interrupt>
   16:	00 00       	nop
@@ -160,20 +160,20 @@ Disassembly of section .text:
   f4:	12 e0       	ldi	r17, 0x02	; 2
   f6:	a0 e0       	ldi	r26, 0x00	; 0
   f8:	b2 e0       	ldi	r27, 0x02	; 2
-  fa:	e4 e6       	ldi	r30, 0x64	; 100
+  fa:	e0 e5       	ldi	r30, 0x50	; 80
   fc:	f4 e0       	ldi	r31, 0x04	; 4
   fe:	00 e0       	ldi	r16, 0x00	; 0
  100:	0b bf       	out	0x3b, r16	; 59
  102:	02 c0       	rjmp	.+4      	; 0x108 <__do_copy_data+0x14>
  104:	07 90       	elpm	r0, Z+
  106:	0d 92       	st	X+, r0
- 108:	ae 32       	cpi	r26, 0x2E	; 46
+ 108:	ac 32       	cpi	r26, 0x2C	; 44
  10a:	b1 07       	cpc	r27, r17
  10c:	d9 f7       	brne	.-10     	; 0x104 <__do_copy_data+0x10>
 
 0000010e <__do_clear_bss>:
  10e:	22 e0       	ldi	r18, 0x02	; 2
- 110:	ae e2       	ldi	r26, 0x2E	; 46
+ 110:	ac e2       	ldi	r26, 0x2C	; 44
  112:	b2 e0       	ldi	r27, 0x02	; 2
  114:	01 c0       	rjmp	.+2      	; 0x118 <.do_clear_bss_start>
 
@@ -181,11 +181,11 @@ Disassembly of section .text:
  116:	1d 92       	st	X+, r1
 
 00000118 <.do_clear_bss_start>:
- 118:	ae 32       	cpi	r26, 0x2E	; 46
+ 118:	ac 32       	cpi	r26, 0x2C	; 44
  11a:	b2 07       	cpc	r27, r18
  11c:	e1 f7       	brne	.-8      	; 0x116 <.do_clear_bss_loop>
- 11e:	82 d0       	rcall	.+260    	; 0x224 <main>
- 120:	9f c1       	rjmp	.+830    	; 0x460 <_exit>
+ 11e:	b4 d0       	rcall	.+360    	; 0x288 <main>
+ 120:	95 c1       	rjmp	.+810    	; 0x44c <_exit>
 
 00000122 <__bad_interrupt>:
  122:	6e cf       	rjmp	.-292    	; 0x0 <__vectors>
@@ -307,515 +307,472 @@ Disassembly of section .text:
  1ee:	84 bb       	out	0x14, r24	; 20
  1f0:	08 95       	ret
 
-000001f2 <rotateFridge>:
+000001f2 <registerCar>:
+ 1f2:	cf 93       	push	r28
+ 1f4:	df 93       	push	r29
+ 1f6:	c0 e0       	ldi	r28, 0x00	; 0
+ 1f8:	d0 e0       	ldi	r29, 0x00	; 0
+ 1fa:	09 c0       	rjmp	.+18     	; 0x20e <registerCar+0x1c>
+ 1fc:	ec df       	rcall	.-40     	; 0x1d6 <dataMode>
+ 1fe:	fe 01       	movw	r30, r28
+ 200:	e0 50       	subi	r30, 0x00	; 0
+ 202:	fe 4f       	sbci	r31, 0xFE	; 254
+ 204:	80 81       	ld	r24, Z
+ 206:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__TEXT_REGION_LENGTH__+0x7c0102>
+ 20a:	d2 df       	rcall	.-92     	; 0x1b0 <lunch>
+ 20c:	21 96       	adiw	r28, 0x01	; 1
+ 20e:	c6 31       	cpi	r28, 0x16	; 22
+ 210:	d1 05       	cpc	r29, r1
+ 212:	a4 f3       	brlt	.-24     	; 0x1fc <registerCar+0xa>
+ 214:	87 df       	rcall	.-242    	; 0x124 <keypadGate>
+ 216:	df 91       	pop	r29
+ 218:	cf 91       	pop	r28
+ 21a:	08 95       	ret
+
+0000021c <registration>:
+ 21c:	ea df       	rcall	.-44     	; 0x1f2 <registerCar>
+ 21e:	2f ed       	ldi	r18, 0xDF	; 223
+ 220:	83 e9       	ldi	r24, 0x93	; 147
+ 222:	94 e0       	ldi	r25, 0x04	; 4
+ 224:	21 50       	subi	r18, 0x01	; 1
+ 226:	80 40       	sbci	r24, 0x00	; 0
+ 228:	90 40       	sbci	r25, 0x00	; 0
+ 22a:	e1 f7       	brne	.-8      	; 0x224 <registration+0x8>
+ 22c:	00 c0       	rjmp	.+0      	; 0x22e <registration+0x12>
+ 22e:	00 00       	nop
+ 230:	2f ed       	ldi	r18, 0xDF	; 223
+ 232:	83 e9       	ldi	r24, 0x93	; 147
+ 234:	94 e0       	ldi	r25, 0x04	; 4
+ 236:	21 50       	subi	r18, 0x01	; 1
+ 238:	80 40       	sbci	r24, 0x00	; 0
+ 23a:	90 40       	sbci	r25, 0x00	; 0
+ 23c:	e1 f7       	brne	.-8      	; 0x236 <registration+0x1a>
+ 23e:	00 c0       	rjmp	.+0      	; 0x240 <registration+0x24>
+ 240:	00 00       	nop
+ 242:	2f ed       	ldi	r18, 0xDF	; 223
+ 244:	83 e9       	ldi	r24, 0x93	; 147
+ 246:	94 e0       	ldi	r25, 0x04	; 4
+ 248:	21 50       	subi	r18, 0x01	; 1
+ 24a:	80 40       	sbci	r24, 0x00	; 0
+ 24c:	90 40       	sbci	r25, 0x00	; 0
+ 24e:	e1 f7       	brne	.-8      	; 0x248 <registration+0x2c>
+ 250:	00 c0       	rjmp	.+0      	; 0x252 <registration+0x36>
+ 252:	00 00       	nop
+ 254:	08 95       	ret
+
+00000256 <rotateFridge>:
 
 // function to rotate the motor
 void rotateFridge()
 {
 	PORTJ = 0b00000010; // do rotate clockwise
- 1f2:	e5 e0       	ldi	r30, 0x05	; 5
- 1f4:	f1 e0       	ldi	r31, 0x01	; 1
- 1f6:	82 e0       	ldi	r24, 0x02	; 2
- 1f8:	80 83       	st	Z, r24
+ 256:	e5 e0       	ldi	r30, 0x05	; 5
+ 258:	f1 e0       	ldi	r31, 0x01	; 1
+ 25a:	82 e0       	ldi	r24, 0x02	; 2
+ 25c:	80 83       	st	Z, r24
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 1fa:	2f e3       	ldi	r18, 0x3F	; 63
- 1fc:	8d e0       	ldi	r24, 0x0D	; 13
- 1fe:	93 e0       	ldi	r25, 0x03	; 3
- 200:	21 50       	subi	r18, 0x01	; 1
- 202:	80 40       	sbci	r24, 0x00	; 0
- 204:	90 40       	sbci	r25, 0x00	; 0
- 206:	e1 f7       	brne	.-8      	; 0x200 <rotateFridge+0xe>
- 208:	00 c0       	rjmp	.+0      	; 0x20a <rotateFridge+0x18>
- 20a:	00 00       	nop
+ 25e:	2f e3       	ldi	r18, 0x3F	; 63
+ 260:	8d e0       	ldi	r24, 0x0D	; 13
+ 262:	93 e0       	ldi	r25, 0x03	; 3
+ 264:	21 50       	subi	r18, 0x01	; 1
+ 266:	80 40       	sbci	r24, 0x00	; 0
+ 268:	90 40       	sbci	r25, 0x00	; 0
+ 26a:	e1 f7       	brne	.-8      	; 0x264 <rotateFridge+0xe>
+ 26c:	00 c0       	rjmp	.+0      	; 0x26e <rotateFridge+0x18>
+ 26e:	00 00       	nop
 	_delay_ms(1000);
 	PORTJ = 0b00000001; // do rotate anti clockwise
- 20c:	81 e0       	ldi	r24, 0x01	; 1
- 20e:	80 83       	st	Z, r24
- 210:	2f e3       	ldi	r18, 0x3F	; 63
- 212:	8d e0       	ldi	r24, 0x0D	; 13
- 214:	93 e0       	ldi	r25, 0x03	; 3
- 216:	21 50       	subi	r18, 0x01	; 1
- 218:	80 40       	sbci	r24, 0x00	; 0
- 21a:	90 40       	sbci	r25, 0x00	; 0
- 21c:	e1 f7       	brne	.-8      	; 0x216 <rotateFridge+0x24>
- 21e:	00 c0       	rjmp	.+0      	; 0x220 <rotateFridge+0x2e>
- 220:	00 00       	nop
- 222:	08 95       	ret
+ 270:	81 e0       	ldi	r24, 0x01	; 1
+ 272:	80 83       	st	Z, r24
+ 274:	2f e3       	ldi	r18, 0x3F	; 63
+ 276:	8d e0       	ldi	r24, 0x0D	; 13
+ 278:	93 e0       	ldi	r25, 0x03	; 3
+ 27a:	21 50       	subi	r18, 0x01	; 1
+ 27c:	80 40       	sbci	r24, 0x00	; 0
+ 27e:	90 40       	sbci	r25, 0x00	; 0
+ 280:	e1 f7       	brne	.-8      	; 0x27a <rotateFridge+0x24>
+ 282:	00 c0       	rjmp	.+0      	; 0x284 <rotateFridge+0x2e>
+ 284:	00 00       	nop
+ 286:	08 95       	ret
 
-00000224 <main>:
+00000288 <main>:
 
 int main(void)
 {
 
 	// setting up the button and interrupt
 	DDRB |= (1 << 0);  // setting 1 for output of the button when it does an interrupt
- 224:	84 b1       	in	r24, 0x04	; 4
- 226:	81 60       	ori	r24, 0x01	; 1
- 228:	84 b9       	out	0x04, r24	; 4
+ 288:	84 b1       	in	r24, 0x04	; 4
+ 28a:	81 60       	ori	r24, 0x01	; 1
+ 28c:	84 b9       	out	0x04, r24	; 4
 	DDRD &= ~(1 << 3); // setting 0 for input of the button
- 22a:	8a b1       	in	r24, 0x0a	; 10
- 22c:	87 7f       	andi	r24, 0xF7	; 247
- 22e:	8a b9       	out	0x0a, r24	; 10
+ 28e:	8a b1       	in	r24, 0x0a	; 10
+ 290:	87 7f       	andi	r24, 0xF7	; 247
+ 292:	8a b9       	out	0x0a, r24	; 10
 	DDRD &= ~(1 << 2); // setting 0 for input of the button
- 230:	8a b1       	in	r24, 0x0a	; 10
- 232:	8b 7f       	andi	r24, 0xFB	; 251
- 234:	8a b9       	out	0x0a, r24	; 10
+ 294:	8a b1       	in	r24, 0x0a	; 10
+ 296:	8b 7f       	andi	r24, 0xFB	; 251
+ 298:	8a b9       	out	0x0a, r24	; 10
 	// for 1st btn
 	EICRA |= (1 << INT3); // Set for falling edge triggering
- 236:	e9 e6       	ldi	r30, 0x69	; 105
- 238:	f0 e0       	ldi	r31, 0x00	; 0
- 23a:	80 81       	ld	r24, Z
- 23c:	88 60       	ori	r24, 0x08	; 8
- 23e:	80 83       	st	Z, r24
+ 29a:	e9 e6       	ldi	r30, 0x69	; 105
+ 29c:	f0 e0       	ldi	r31, 0x00	; 0
+ 29e:	80 81       	ld	r24, Z
+ 2a0:	88 60       	ori	r24, 0x08	; 8
+ 2a2:	80 83       	st	Z, r24
 	EIMSK |= (1 << INT3); // Enable INT0
- 240:	8d b3       	in	r24, 0x1d	; 29
- 242:	88 60       	ori	r24, 0x08	; 8
- 244:	8d bb       	out	0x1d, r24	; 29
+ 2a4:	8d b3       	in	r24, 0x1d	; 29
+ 2a6:	88 60       	ori	r24, 0x08	; 8
+ 2a8:	8d bb       	out	0x1d, r24	; 29
 	// for 2nd btn
 	EICRA |= (1 << INT2);
- 246:	80 81       	ld	r24, Z
- 248:	84 60       	ori	r24, 0x04	; 4
- 24a:	80 83       	st	Z, r24
+ 2aa:	80 81       	ld	r24, Z
+ 2ac:	84 60       	ori	r24, 0x04	; 4
+ 2ae:	80 83       	st	Z, r24
 	EIMSK |= (1 << INT2);
- 24c:	8d b3       	in	r24, 0x1d	; 29
- 24e:	84 60       	ori	r24, 0x04	; 4
- 250:	8d bb       	out	0x1d, r24	; 29
+ 2b0:	8d b3       	in	r24, 0x1d	; 29
+ 2b2:	84 60       	ori	r24, 0x04	; 4
+ 2b4:	8d bb       	out	0x1d, r24	; 29
 	sei(); // enable external interrupts globally
- 252:	78 94       	sei
+ 2b6:	78 94       	sei
 
 	// setup the LCD
 	DDRG = 0xFF; // set all pins on port G to output
- 254:	8f ef       	ldi	r24, 0xFF	; 255
- 256:	83 bb       	out	0x13, r24	; 19
+ 2b8:	8f ef       	ldi	r24, 0xFF	; 255
+ 2ba:	83 bb       	out	0x13, r24	; 19
 	DDRH = 0xFF; // set all pins on port H to output
- 258:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <__TEXT_REGION_LENGTH__+0x7c0101>
+ 2bc:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <__TEXT_REGION_LENGTH__+0x7c0101>
 
 	// setting up motor
 	DDRJ = 0xFF; // set all pins on port J to output
- 25c:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <__TEXT_REGION_LENGTH__+0x7c0104>
+ 2c0:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <__TEXT_REGION_LENGTH__+0x7c0104>
 
 	// keypads DDR setup
 	DDRA = 0b11110000;
- 260:	80 ef       	ldi	r24, 0xF0	; 240
- 262:	81 b9       	out	0x01, r24	; 1
+ 2c4:	80 ef       	ldi	r24, 0xF0	; 240
+ 2c6:	81 b9       	out	0x01, r24	; 1
 	DDRB = 0b11110001;
- 264:	81 ef       	ldi	r24, 0xF1	; 241
- 266:	84 b9       	out	0x04, r24	; 4
+ 2c8:	81 ef       	ldi	r24, 0xF1	; 241
+ 2ca:	84 b9       	out	0x04, r24	; 4
 
 	while (1)
 	{
 		commandMode();
- 268:	bd df       	rcall	.-134    	; 0x1e4 <commandMode>
+ 2cc:	8b df       	rcall	.-234    	; 0x1e4 <commandMode>
 		lunch();
- 26a:	a2 df       	rcall	.-188    	; 0x1b0 <lunch>
- 26c:	8f e0       	ldi	r24, 0x0F	; 15
+ 2ce:	70 df       	rcall	.-288    	; 0x1b0 <lunch>
+ 2d0:	8f e0       	ldi	r24, 0x0F	; 15
 		PORTH = 0x0f;
- 26e:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__TEXT_REGION_LENGTH__+0x7c0102>
+ 2d2:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__TEXT_REGION_LENGTH__+0x7c0102>
 		lunch();
- 272:	9e df       	rcall	.-196    	; 0x1b0 <lunch>
- 274:	85 b1       	in	r24, 0x05	; 5
+ 2d6:	6c df       	rcall	.-296    	; 0x1b0 <lunch>
+ 2d8:	85 b1       	in	r24, 0x05	; 5
 
 		// keypadGate
 
 		// keypadFridge
 		PORTB &= ~(1 << 5);				// set column 1 to 0
- 276:	8f 7d       	andi	r24, 0xDF	; 223
- 278:	85 b9       	out	0x05, r24	; 5
- 27a:	1c 99       	sbic	0x03, 4	; 3
+ 2da:	8f 7d       	andi	r24, 0xDF	; 223
+ 2dc:	85 b9       	out	0x05, r24	; 5
+ 2de:	1c 99       	sbic	0x03, 4	; 3
 		if ((PINB & 0b000010000) == 00) // check if row 1 is 1
- 27c:	03 c0       	rjmp	.+6      	; 0x284 <main+0x60>
- 27e:	81 e0       	ldi	r24, 0x01	; 1
+ 2e0:	03 c0       	rjmp	.+6      	; 0x2e8 <main+0x60>
+ 2e2:	81 e0       	ldi	r24, 0x01	; 1
 		{
 			PORTB = (1 << 0); // display 1
- 280:	85 b9       	out	0x05, r24	; 5
- 282:	0e c0       	rjmp	.+28     	; 0x2a0 <main+0x7c>
- 284:	1b 99       	sbic	0x03, 3	; 3
+ 2e4:	85 b9       	out	0x05, r24	; 5
+ 2e6:	0e c0       	rjmp	.+28     	; 0x304 <main+0x7c>
+ 2e8:	1b 99       	sbic	0x03, 3	; 3
 		}
 		else if ((PINB & 0b00001000) == 00)
- 286:	03 c0       	rjmp	.+6      	; 0x28e <main+0x6a>
- 288:	81 e0       	ldi	r24, 0x01	; 1
+ 2ea:	03 c0       	rjmp	.+6      	; 0x2f2 <main+0x6a>
+ 2ec:	81 e0       	ldi	r24, 0x01	; 1
 		{
 			PORTB = (1 << 0); // display 4
- 28a:	85 b9       	out	0x05, r24	; 5
- 28c:	09 c0       	rjmp	.+18     	; 0x2a0 <main+0x7c>
- 28e:	1a 99       	sbic	0x03, 2	; 3
+ 2ee:	85 b9       	out	0x05, r24	; 5
+ 2f0:	09 c0       	rjmp	.+18     	; 0x304 <main+0x7c>
+ 2f2:	1a 99       	sbic	0x03, 2	; 3
 		}
 		else if ((PINB & 0b00000100) == 00)
- 290:	03 c0       	rjmp	.+6      	; 0x298 <main+0x74>
- 292:	81 e0       	ldi	r24, 0x01	; 1
+ 2f4:	03 c0       	rjmp	.+6      	; 0x2fc <main+0x74>
+ 2f6:	81 e0       	ldi	r24, 0x01	; 1
 		{
 			PORTB = (1 << 0); // display 7
- 294:	85 b9       	out	0x05, r24	; 5
- 296:	04 c0       	rjmp	.+8      	; 0x2a0 <main+0x7c>
- 298:	19 99       	sbic	0x03, 1	; 3
+ 2f8:	85 b9       	out	0x05, r24	; 5
+ 2fa:	04 c0       	rjmp	.+8      	; 0x304 <main+0x7c>
+ 2fc:	19 99       	sbic	0x03, 1	; 3
 		}
 		else if ((PINB & 0b00000010) == 00)
- 29a:	02 c0       	rjmp	.+4      	; 0x2a0 <main+0x7c>
- 29c:	81 e0       	ldi	r24, 0x01	; 1
+ 2fe:	02 c0       	rjmp	.+4      	; 0x304 <main+0x7c>
+ 300:	81 e0       	ldi	r24, 0x01	; 1
 		{
 			PORTB = (1 << 0); // display *
- 29e:	85 b9       	out	0x05, r24	; 5
- 2a0:	85 b1       	in	r24, 0x05	; 5
+ 302:	85 b9       	out	0x05, r24	; 5
+ 304:	85 b1       	in	r24, 0x05	; 5
 		}
 
 		PORTB &= ~(1 << 6);				// set column 2 to 0
- 2a2:	8f 7b       	andi	r24, 0xBF	; 191
- 2a4:	85 b9       	out	0x05, r24	; 5
- 2a6:	1c 99       	sbic	0x03, 4	; 3
+ 306:	8f 7b       	andi	r24, 0xBF	; 191
+ 308:	85 b9       	out	0x05, r24	; 5
+ 30a:	1c 99       	sbic	0x03, 4	; 3
 		if ((PINB & 0b000010000) == 00) // check if row 1 is 1
- 2a8:	03 c0       	rjmp	.+6      	; 0x2b0 <main+0x8c>
- 2aa:	81 e0       	ldi	r24, 0x01	; 1
+ 30c:	03 c0       	rjmp	.+6      	; 0x314 <main+0x8c>
+ 30e:	81 e0       	ldi	r24, 0x01	; 1
 		{
 			PORTB = (1 << 0); // display 2
- 2ac:	85 b9       	out	0x05, r24	; 5
- 2ae:	0e c0       	rjmp	.+28     	; 0x2cc <main+0xa8>
- 2b0:	1b 99       	sbic	0x03, 3	; 3
+ 310:	85 b9       	out	0x05, r24	; 5
+ 312:	0e c0       	rjmp	.+28     	; 0x330 <main+0xa8>
+ 314:	1b 99       	sbic	0x03, 3	; 3
 		}
 		else if ((PINB & 0b00001000) == 00)
- 2b2:	03 c0       	rjmp	.+6      	; 0x2ba <main+0x96>
- 2b4:	81 e0       	ldi	r24, 0x01	; 1
+ 316:	03 c0       	rjmp	.+6      	; 0x31e <main+0x96>
+ 318:	81 e0       	ldi	r24, 0x01	; 1
 		{
 			PORTB = (1 << 0); // display 5
- 2b6:	85 b9       	out	0x05, r24	; 5
- 2b8:	09 c0       	rjmp	.+18     	; 0x2cc <main+0xa8>
- 2ba:	1a 99       	sbic	0x03, 2	; 3
+ 31a:	85 b9       	out	0x05, r24	; 5
+ 31c:	09 c0       	rjmp	.+18     	; 0x330 <main+0xa8>
+ 31e:	1a 99       	sbic	0x03, 2	; 3
 		}
 		else if ((PINB & 0b00000100) == 00)
- 2bc:	03 c0       	rjmp	.+6      	; 0x2c4 <main+0xa0>
- 2be:	81 e0       	ldi	r24, 0x01	; 1
+ 320:	03 c0       	rjmp	.+6      	; 0x328 <main+0xa0>
+ 322:	81 e0       	ldi	r24, 0x01	; 1
 		{
 			PORTB = (1 << 0); // display 8
- 2c0:	85 b9       	out	0x05, r24	; 5
- 2c2:	04 c0       	rjmp	.+8      	; 0x2cc <main+0xa8>
- 2c4:	19 99       	sbic	0x03, 1	; 3
+ 324:	85 b9       	out	0x05, r24	; 5
+ 326:	04 c0       	rjmp	.+8      	; 0x330 <main+0xa8>
+ 328:	19 99       	sbic	0x03, 1	; 3
 		}
 		else if ((PINB & 0b00000010) == 00)
- 2c6:	02 c0       	rjmp	.+4      	; 0x2cc <main+0xa8>
- 2c8:	81 e0       	ldi	r24, 0x01	; 1
+ 32a:	02 c0       	rjmp	.+4      	; 0x330 <main+0xa8>
+ 32c:	81 e0       	ldi	r24, 0x01	; 1
 		{
 			PORTB = (1 << 0); // display 0
- 2ca:	85 b9       	out	0x05, r24	; 5
- 2cc:	85 b1       	in	r24, 0x05	; 5
+ 32e:	85 b9       	out	0x05, r24	; 5
+ 330:	85 b1       	in	r24, 0x05	; 5
 		}
 
 		PORTB &= ~(1 << 7);				// set column 3 to 0
- 2ce:	8f 77       	andi	r24, 0x7F	; 127
- 2d0:	85 b9       	out	0x05, r24	; 5
- 2d2:	1c 99       	sbic	0x03, 4	; 3
+ 332:	8f 77       	andi	r24, 0x7F	; 127
+ 334:	85 b9       	out	0x05, r24	; 5
+ 336:	1c 99       	sbic	0x03, 4	; 3
 		if ((PINB & 0b000010000) == 00) // check if row 1 is 1
- 2d4:	03 c0       	rjmp	.+6      	; 0x2dc <main+0xb8>
- 2d6:	81 e0       	ldi	r24, 0x01	; 1
+ 338:	03 c0       	rjmp	.+6      	; 0x340 <main+0xb8>
+ 33a:	81 e0       	ldi	r24, 0x01	; 1
 		{
 			PORTB = (1 << 0); // display 3
- 2d8:	85 b9       	out	0x05, r24	; 5
- 2da:	0e c0       	rjmp	.+28     	; 0x2f8 <main+0xd4>
- 2dc:	1b 99       	sbic	0x03, 3	; 3
+ 33c:	85 b9       	out	0x05, r24	; 5
+ 33e:	0e c0       	rjmp	.+28     	; 0x35c <main+0xd4>
+ 340:	1b 99       	sbic	0x03, 3	; 3
 		}
 		else if ((PINB & 0b00001000) == 00)
- 2de:	03 c0       	rjmp	.+6      	; 0x2e6 <main+0xc2>
- 2e0:	81 e0       	ldi	r24, 0x01	; 1
+ 342:	03 c0       	rjmp	.+6      	; 0x34a <main+0xc2>
+ 344:	81 e0       	ldi	r24, 0x01	; 1
 		{
 			PORTB = (1 << 0); // display 6
- 2e2:	85 b9       	out	0x05, r24	; 5
- 2e4:	09 c0       	rjmp	.+18     	; 0x2f8 <main+0xd4>
- 2e6:	1a 99       	sbic	0x03, 2	; 3
+ 346:	85 b9       	out	0x05, r24	; 5
+ 348:	09 c0       	rjmp	.+18     	; 0x35c <main+0xd4>
+ 34a:	1a 99       	sbic	0x03, 2	; 3
 		}
 		else if ((PINB & 0b00000100) == 00)
- 2e8:	03 c0       	rjmp	.+6      	; 0x2f0 <main+0xcc>
- 2ea:	81 e0       	ldi	r24, 0x01	; 1
+ 34c:	03 c0       	rjmp	.+6      	; 0x354 <main+0xcc>
+ 34e:	81 e0       	ldi	r24, 0x01	; 1
 		{
 			PORTB = (1 << 0); // display 9
- 2ec:	85 b9       	out	0x05, r24	; 5
- 2ee:	04 c0       	rjmp	.+8      	; 0x2f8 <main+0xd4>
- 2f0:	19 99       	sbic	0x03, 1	; 3
+ 350:	85 b9       	out	0x05, r24	; 5
+ 352:	04 c0       	rjmp	.+8      	; 0x35c <main+0xd4>
+ 354:	19 99       	sbic	0x03, 1	; 3
 		}
 		else if ((PINB & 0b00000010) == 00)
- 2f2:	02 c0       	rjmp	.+4      	; 0x2f8 <main+0xd4>
+ 356:	02 c0       	rjmp	.+4      	; 0x35c <main+0xd4>
 		{
 			PORTB = (1 << 0); // display #
- 2f4:	81 e0       	ldi	r24, 0x01	; 1
- 2f6:	85 b9       	out	0x05, r24	; 5
+ 358:	81 e0       	ldi	r24, 0x01	; 1
+ 35a:	85 b9       	out	0x05, r24	; 5
 		}
 
 		// rotateFridge();
 		rotateFridge();
- 2f8:	7c df       	rcall	.-264    	; 0x1f2 <rotateFridge>
- 2fa:	b6 cf       	rjmp	.-148    	; 0x268 <main+0x44>
+ 35c:	7c df       	rcall	.-264    	; 0x256 <rotateFridge>
+ 35e:	b6 cf       	rjmp	.-148    	; 0x2cc <main+0x44>
 
-000002fc <clearScreen>:
+00000360 <clearScreen>:
 	}
- 2fc:	81 e0       	ldi	r24, 0x01	; 1
+ 360:	81 e0       	ldi	r24, 0x01	; 1
 	_delay_ms(1000);
 }
 // function to always clear the screen of the LCD
 void clearScreen()
 {
 	PORTH = 0x01;
- 2fe:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__TEXT_REGION_LENGTH__+0x7c0102>
+ 362:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__TEXT_REGION_LENGTH__+0x7c0102>
 	lunch();
- 302:	56 cf       	rjmp	.-340    	; 0x1b0 <lunch>
- 304:	08 95       	ret
+ 366:	24 cf       	rjmp	.-440    	; 0x1b0 <lunch>
+ 368:	08 95       	ret
 
-00000306 <displayWelcome>:
+0000036a <displayWelcome>:
 {
 	PORTG &= ~(1 << 0); // set rs to 0- command mode
 	PORTG &= ~(1 << 1); // set rw to 0- write mode
 }
 void displayWelcome()
 {
- 306:	cf 93       	push	r28
- 308:	df 93       	push	r29
+ 36a:	cf 93       	push	r28
+ 36c:	df 93       	push	r29
 	// the loop to display the welcome message
 	for (int i = 0; i < 17; i++)
- 30a:	c0 e0       	ldi	r28, 0x00	; 0
- 30c:	d0 e0       	ldi	r29, 0x00	; 0
- 30e:	09 c0       	rjmp	.+18     	; 0x322 <displayWelcome+0x1c>
+ 36e:	c0 e0       	ldi	r28, 0x00	; 0
+ 370:	d0 e0       	ldi	r29, 0x00	; 0
+ 372:	09 c0       	rjmp	.+18     	; 0x386 <displayWelcome+0x1c>
 	{
 		dataMode();
- 310:	62 df       	rcall	.-316    	; 0x1d6 <dataMode>
+ 374:	30 df       	rcall	.-416    	; 0x1d6 <dataMode>
 		PORTH = message[i];
- 312:	fe 01       	movw	r30, r28
- 314:	e8 5e       	subi	r30, 0xE8	; 232
- 316:	fd 4f       	sbci	r31, 0xFD	; 253
- 318:	80 81       	ld	r24, Z
- 31a:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__TEXT_REGION_LENGTH__+0x7c0102>
+ 376:	fe 01       	movw	r30, r28
+ 378:	e8 5e       	subi	r30, 0xE8	; 232
+ 37a:	fd 4f       	sbci	r31, 0xFD	; 253
+ 37c:	80 81       	ld	r24, Z
+ 37e:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__TEXT_REGION_LENGTH__+0x7c0102>
 		lunch();
- 31e:	48 df       	rcall	.-368    	; 0x1b0 <lunch>
+ 382:	16 df       	rcall	.-468    	; 0x1b0 <lunch>
 	PORTG &= ~(1 << 1); // set rw to 0- write mode
 }
 void displayWelcome()
 {
 	// the loop to display the welcome message
 	for (int i = 0; i < 17; i++)
- 320:	21 96       	adiw	r28, 0x01	; 1
- 322:	c1 31       	cpi	r28, 0x11	; 17
- 324:	d1 05       	cpc	r29, r1
- 326:	a4 f3       	brlt	.-24     	; 0x310 <displayWelcome+0xa>
- 328:	2f e9       	ldi	r18, 0x9F	; 159
- 32a:	86 e8       	ldi	r24, 0x86	; 134
- 32c:	91 e0       	ldi	r25, 0x01	; 1
- 32e:	21 50       	subi	r18, 0x01	; 1
- 330:	80 40       	sbci	r24, 0x00	; 0
- 332:	90 40       	sbci	r25, 0x00	; 0
- 334:	e1 f7       	brne	.-8      	; 0x32e <displayWelcome+0x28>
- 336:	00 c0       	rjmp	.+0      	; 0x338 <displayWelcome+0x32>
+ 384:	21 96       	adiw	r28, 0x01	; 1
+ 386:	c1 31       	cpi	r28, 0x11	; 17
+ 388:	d1 05       	cpc	r29, r1
+ 38a:	a4 f3       	brlt	.-24     	; 0x374 <displayWelcome+0xa>
+ 38c:	2f e9       	ldi	r18, 0x9F	; 159
+ 38e:	86 e8       	ldi	r24, 0x86	; 134
+ 390:	91 e0       	ldi	r25, 0x01	; 1
+ 392:	21 50       	subi	r18, 0x01	; 1
+ 394:	80 40       	sbci	r24, 0x00	; 0
+ 396:	90 40       	sbci	r25, 0x00	; 0
+ 398:	e1 f7       	brne	.-8      	; 0x392 <displayWelcome+0x28>
+ 39a:	00 c0       	rjmp	.+0      	; 0x39c <displayWelcome+0x32>
 		dataMode();
 		PORTH = message[i];
 		lunch();
 	}
 	_delay_ms(500);
 	clearScreen();
- 338:	00 00       	nop
- 33a:	e0 df       	rcall	.-64     	; 0x2fc <clearScreen>
+ 39c:	00 00       	nop
+ 39e:	e0 df       	rcall	.-64     	; 0x360 <clearScreen>
 }
- 33c:	df 91       	pop	r29
- 33e:	cf 91       	pop	r28
- 340:	08 95       	ret
+ 3a0:	df 91       	pop	r29
+ 3a2:	cf 91       	pop	r28
+ 3a4:	08 95       	ret
 
-00000342 <registerCar>:
-	_delay_ms(1500);
-}
-
-// function to do car registration
-void registerCar()
-{
- 342:	cf 93       	push	r28
- 344:	df 93       	push	r29
-	int i;
-
-	i = 0;
- 346:	c0 e0       	ldi	r28, 0x00	; 0
- 348:	d0 e0       	ldi	r29, 0x00	; 0
-
-	while (numberplate[i] != '\0')
- 34a:	09 c0       	rjmp	.+18     	; 0x35e <registerCar+0x1c>
-	{
-		dataMode();
- 34c:	44 df       	rcall	.-376    	; 0x1d6 <dataMode>
-		PORTH = numberplate[i];
- 34e:	fe 01       	movw	r30, r28
- 350:	e0 50       	subi	r30, 0x00	; 0
- 352:	fe 4f       	sbci	r31, 0xFE	; 254
- 354:	80 81       	ld	r24, Z
- 356:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__TEXT_REGION_LENGTH__+0x7c0102>
-		lunch();
- 35a:	2a df       	rcall	.-428    	; 0x1b0 <lunch>
-		i++;
- 35c:	21 96       	adiw	r28, 0x01	; 1
-{
-	int i;
-
-	i = 0;
-
-	while (numberplate[i] != '\0')
- 35e:	fe 01       	movw	r30, r28
- 360:	e0 50       	subi	r30, 0x00	; 0
- 362:	fe 4f       	sbci	r31, 0xFE	; 254
- 364:	80 81       	ld	r24, Z
- 366:	81 11       	cpse	r24, r1
-		lunch();
-		i++;
-	}
-
-	// capture the number plate from the keypad
-	int numberPlate = keypadGate();
- 368:	f1 cf       	rjmp	.-30     	; 0x34c <registerCar+0xa>
-	// display the number plate on the LCD
-	commandMode();
- 36a:	dc de       	rcall	.-584    	; 0x124 <keypadGate>
- 36c:	3b df       	rcall	.-394    	; 0x1e4 <commandMode>
-	clearScreen();
- 36e:	c6 df       	rcall	.-116    	; 0x2fc <clearScreen>
- 370:	32 df       	rcall	.-412    	; 0x1d6 <dataMode>
-	dataMode();
- 372:	8b e2       	ldi	r24, 0x2B	; 43
- 374:	92 e0       	ldi	r25, 0x02	; 2
-	PORTH = "W";
- 376:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__TEXT_REGION_LENGTH__+0x7c0102>
- 37a:	df 91       	pop	r29
- 37c:	cf 91       	pop	r28
-}
- 37e:	08 95       	ret
-
-00000380 <registration>:
- 380:	e0 df       	rcall	.-64     	; 0x342 <registerCar>
- 382:	2f ed       	ldi	r18, 0xDF	; 223
- 384:	83 e9       	ldi	r24, 0x93	; 147
- 386:	94 e0       	ldi	r25, 0x04	; 4
- 388:	21 50       	subi	r18, 0x01	; 1
- 38a:	80 40       	sbci	r24, 0x00	; 0
- 38c:	90 40       	sbci	r25, 0x00	; 0
- 38e:	e1 f7       	brne	.-8      	; 0x388 <registration+0x8>
- 390:	00 c0       	rjmp	.+0      	; 0x392 <registration+0x12>
- 392:	00 00       	nop
- 394:	2f ed       	ldi	r18, 0xDF	; 223
- 396:	83 e9       	ldi	r24, 0x93	; 147
- 398:	94 e0       	ldi	r25, 0x04	; 4
- 39a:	21 50       	subi	r18, 0x01	; 1
- 39c:	80 40       	sbci	r24, 0x00	; 0
- 39e:	90 40       	sbci	r25, 0x00	; 0
- 3a0:	e1 f7       	brne	.-8      	; 0x39a <registration+0x1a>
- 3a2:	00 c0       	rjmp	.+0      	; 0x3a4 <registration+0x24>
- 3a4:	00 00       	nop
- 3a6:	2f ed       	ldi	r18, 0xDF	; 223
- 3a8:	83 e9       	ldi	r24, 0x93	; 147
- 3aa:	94 e0       	ldi	r25, 0x04	; 4
- 3ac:	21 50       	subi	r18, 0x01	; 1
- 3ae:	80 40       	sbci	r24, 0x00	; 0
- 3b0:	90 40       	sbci	r25, 0x00	; 0
- 3b2:	e1 f7       	brne	.-8      	; 0x3ac <registration+0x2c>
- 3b4:	00 c0       	rjmp	.+0      	; 0x3b6 <registration+0x36>
- 3b6:	00 00       	nop
- 3b8:	08 95       	ret
-
-000003ba <__vector_4>:
+000003a6 <__vector_4>:
 	lunch();
 }
 
 // do the interrupt service run tine for INT0
 ISR(INT3_vect)
 {
- 3ba:	1f 92       	push	r1
- 3bc:	0f 92       	push	r0
- 3be:	0f b6       	in	r0, 0x3f	; 63
- 3c0:	0f 92       	push	r0
- 3c2:	11 24       	eor	r1, r1
- 3c4:	0b b6       	in	r0, 0x3b	; 59
- 3c6:	0f 92       	push	r0
- 3c8:	2f 93       	push	r18
- 3ca:	3f 93       	push	r19
- 3cc:	4f 93       	push	r20
- 3ce:	5f 93       	push	r21
- 3d0:	6f 93       	push	r22
- 3d2:	7f 93       	push	r23
- 3d4:	8f 93       	push	r24
- 3d6:	9f 93       	push	r25
- 3d8:	af 93       	push	r26
- 3da:	bf 93       	push	r27
- 3dc:	ef 93       	push	r30
- 3de:	ff 93       	push	r31
+ 3a6:	1f 92       	push	r1
+ 3a8:	0f 92       	push	r0
+ 3aa:	0f b6       	in	r0, 0x3f	; 63
+ 3ac:	0f 92       	push	r0
+ 3ae:	11 24       	eor	r1, r1
+ 3b0:	0b b6       	in	r0, 0x3b	; 59
+ 3b2:	0f 92       	push	r0
+ 3b4:	2f 93       	push	r18
+ 3b6:	3f 93       	push	r19
+ 3b8:	4f 93       	push	r20
+ 3ba:	5f 93       	push	r21
+ 3bc:	6f 93       	push	r22
+ 3be:	7f 93       	push	r23
+ 3c0:	8f 93       	push	r24
+ 3c2:	9f 93       	push	r25
+ 3c4:	af 93       	push	r26
+ 3c6:	bf 93       	push	r27
+ 3c8:	ef 93       	push	r30
+ 3ca:	ff 93       	push	r31
 	PORTB ^= (1 << 0); // activate the led on an interrupt
- 3e0:	95 b1       	in	r25, 0x05	; 5
- 3e2:	81 e0       	ldi	r24, 0x01	; 1
- 3e4:	89 27       	eor	r24, r25
- 3e6:	85 b9       	out	0x05, r24	; 5
+ 3cc:	95 b1       	in	r25, 0x05	; 5
+ 3ce:	81 e0       	ldi	r24, 0x01	; 1
+ 3d0:	89 27       	eor	r24, r25
+ 3d2:	85 b9       	out	0x05, r24	; 5
 	lunch();
- 3e8:	e3 de       	rcall	.-570    	; 0x1b0 <lunch>
+ 3d4:	ed de       	rcall	.-550    	; 0x1b0 <lunch>
 	displayWelcome(); // Call the function to display the welcome messagel
- 3ea:	8d df       	rcall	.-230    	; 0x306 <displayWelcome>
- 3ec:	ff 91       	pop	r31
+ 3d6:	c9 df       	rcall	.-110    	; 0x36a <displayWelcome>
+ 3d8:	ff 91       	pop	r31
 }
- 3ee:	ef 91       	pop	r30
- 3f0:	bf 91       	pop	r27
- 3f2:	af 91       	pop	r26
- 3f4:	9f 91       	pop	r25
- 3f6:	8f 91       	pop	r24
- 3f8:	7f 91       	pop	r23
- 3fa:	6f 91       	pop	r22
- 3fc:	5f 91       	pop	r21
- 3fe:	4f 91       	pop	r20
- 400:	3f 91       	pop	r19
- 402:	2f 91       	pop	r18
- 404:	0f 90       	pop	r0
- 406:	0b be       	out	0x3b, r0	; 59
- 408:	0f 90       	pop	r0
- 40a:	0f be       	out	0x3f, r0	; 63
- 40c:	0f 90       	pop	r0
- 40e:	1f 90       	pop	r1
- 410:	18 95       	reti
+ 3da:	ef 91       	pop	r30
+ 3dc:	bf 91       	pop	r27
+ 3de:	af 91       	pop	r26
+ 3e0:	9f 91       	pop	r25
+ 3e2:	8f 91       	pop	r24
+ 3e4:	7f 91       	pop	r23
+ 3e6:	6f 91       	pop	r22
+ 3e8:	5f 91       	pop	r21
+ 3ea:	4f 91       	pop	r20
+ 3ec:	3f 91       	pop	r19
+ 3ee:	2f 91       	pop	r18
+ 3f0:	0f 90       	pop	r0
+ 3f2:	0b be       	out	0x3b, r0	; 59
+ 3f4:	0f 90       	pop	r0
+ 3f6:	0f be       	out	0x3f, r0	; 63
+ 3f8:	0f 90       	pop	r0
+ 3fa:	1f 90       	pop	r1
+ 3fc:	18 95       	reti
 
-00000412 <__vector_3>:
- 412:	1f 92       	push	r1
+000003fe <__vector_3>:
+ 3fe:	1f 92       	push	r1
 
 ISR(INT2_vect)
 {
- 414:	0f 92       	push	r0
- 416:	0f b6       	in	r0, 0x3f	; 63
- 418:	0f 92       	push	r0
- 41a:	11 24       	eor	r1, r1
- 41c:	0b b6       	in	r0, 0x3b	; 59
- 41e:	0f 92       	push	r0
- 420:	2f 93       	push	r18
- 422:	3f 93       	push	r19
- 424:	4f 93       	push	r20
- 426:	5f 93       	push	r21
- 428:	6f 93       	push	r22
- 42a:	7f 93       	push	r23
- 42c:	8f 93       	push	r24
- 42e:	9f 93       	push	r25
- 430:	af 93       	push	r26
- 432:	bf 93       	push	r27
- 434:	ef 93       	push	r30
- 436:	ff 93       	push	r31
+ 400:	0f 92       	push	r0
+ 402:	0f b6       	in	r0, 0x3f	; 63
+ 404:	0f 92       	push	r0
+ 406:	11 24       	eor	r1, r1
+ 408:	0b b6       	in	r0, 0x3b	; 59
+ 40a:	0f 92       	push	r0
+ 40c:	2f 93       	push	r18
+ 40e:	3f 93       	push	r19
+ 410:	4f 93       	push	r20
+ 412:	5f 93       	push	r21
+ 414:	6f 93       	push	r22
+ 416:	7f 93       	push	r23
+ 418:	8f 93       	push	r24
+ 41a:	9f 93       	push	r25
+ 41c:	af 93       	push	r26
+ 41e:	bf 93       	push	r27
+ 420:	ef 93       	push	r30
+ 422:	ff 93       	push	r31
 	registration();
- 438:	a3 df       	rcall	.-186    	; 0x380 <registration>
- 43a:	ff 91       	pop	r31
- 43c:	ef 91       	pop	r30
- 43e:	bf 91       	pop	r27
- 440:	af 91       	pop	r26
- 442:	9f 91       	pop	r25
- 444:	8f 91       	pop	r24
- 446:	7f 91       	pop	r23
- 448:	6f 91       	pop	r22
- 44a:	5f 91       	pop	r21
- 44c:	4f 91       	pop	r20
- 44e:	3f 91       	pop	r19
- 450:	2f 91       	pop	r18
- 452:	0f 90       	pop	r0
- 454:	0b be       	out	0x3b, r0	; 59
- 456:	0f 90       	pop	r0
- 458:	0f be       	out	0x3f, r0	; 63
- 45a:	0f 90       	pop	r0
- 45c:	1f 90       	pop	r1
- 45e:	18 95       	reti
+ 424:	fb de       	rcall	.-522    	; 0x21c <registration>
+ 426:	ff 91       	pop	r31
+ 428:	ef 91       	pop	r30
+ 42a:	bf 91       	pop	r27
+ 42c:	af 91       	pop	r26
+ 42e:	9f 91       	pop	r25
+ 430:	8f 91       	pop	r24
+ 432:	7f 91       	pop	r23
+ 434:	6f 91       	pop	r22
+ 436:	5f 91       	pop	r21
+ 438:	4f 91       	pop	r20
+ 43a:	3f 91       	pop	r19
+ 43c:	2f 91       	pop	r18
+ 43e:	0f 90       	pop	r0
+ 440:	0b be       	out	0x3b, r0	; 59
+ 442:	0f 90       	pop	r0
+ 444:	0f be       	out	0x3f, r0	; 63
+ 446:	0f 90       	pop	r0
+ 448:	1f 90       	pop	r1
+ 44a:	18 95       	reti
 
-00000460 <_exit>:
- 460:	f8 94       	cli
+0000044c <_exit>:
+ 44c:	f8 94       	cli
 
-00000462 <__stop_program>:
- 462:	ff cf       	rjmp	.-2      	; 0x462 <__stop_program>
+0000044e <__stop_program>:
+ 44e:	ff cf       	rjmp	.-2      	; 0x44e <__stop_program>
