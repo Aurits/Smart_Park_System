@@ -321,7 +321,7 @@ Disassembly of section .text:
  206:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__TEXT_REGION_LENGTH__+0x7c0102>
  20a:	d2 df       	rcall	.-92     	; 0x1b0 <lunch>
  20c:	21 96       	adiw	r28, 0x01	; 1
- 20e:	c7 31       	cpi	r28, 0x17	; 23
+ 20e:	c4 31       	cpi	r28, 0x14	; 20
  210:	d1 05       	cpc	r29, r1
  212:	a4 f3       	brlt	.-24     	; 0x1fc <registerCar+0xa>
  214:	87 df       	rcall	.-242    	; 0x124 <keypadGate>
