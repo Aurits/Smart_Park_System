@@ -12,17 +12,84 @@
 #define rw
 #define enable
 #define dataline
-unsigned char message[] = "Hello new tourist";
+unsigned char message[] = "Hello new tourist!";
+unsigned char numberplate[] = "Enter your number plate";
+
+unsigned char numberAdults[] = "Enter number of adults";
+unsigned char numberChildren[] = "Enter number of children";
+int flag = 0;
+
+int keypadGate()
+{
+	PORTA &= ~(1 << 4);			   // set column 1 to 0
+	if ((PINA & 0b00001000) == 00) // check if row 1 is 1
+	{
+		return 1; // display 1
+	}
+	else if ((PINA & 0b00000100) == 00)
+	{
+		return 4; // display 4
+	}
+	else if ((PINA & 0b00000010) == 00)
+	{
+		return 7; // display 7
+	}
+	else if ((PINA & 0b00000001) == 00)
+	{
+		return 200; // display *
+	}
+
+	PORTA &= ~(1 << 5);			   // set column 2 to 0
+	if ((PINA & 0b00001000) == 00) // check if row 1 is 1
+	{
+		return 2; // display 2
+	}
+	else if ((PINA & 0b00000100) == 00)
+	{
+		return 5; // display 5
+	}
+	else if ((PINA & 0b00000010) == 00)
+	{
+		return 8; // display 8
+	}
+	else if ((PINA & 0b00000001) == 00)
+	{
+		return 0; // display 0
+	}
+
+	PORTA &= ~(1 << 6);			   // set column 3 to 0
+	if ((PINA & 0b00001000) == 00) // check if row 1 is 1
+	{
+		return 3; // display 3
+	}
+	else if ((PINA & 0b00000100) == 00)
+	{
+		return 6; // display 6
+	}
+	else if ((PINA & 0b00000010) == 00)
+	{
+		return 9; // display 9
+	}
+	else if ((PINA & 0b00000001) == 00)
+	{
+		return 100; // display #
+	}
+}
 
 int main(void)
 {
 
 	// setting up the button and interrupt
-	DDRB |= (1 << 0);	  // setting 1 for output of the button when it does an interrupt
-	DDRD &= ~(1 << 0);	  // setting 0 for input of the button
+	DDRB |= (1 << 0);  // setting 1 for output of the button when it does an interrupt
+	DDRD &= ~(1 << 3); // setting 0 for input of the button
+	DDRD &= ~(1 << 2); // setting 0 for input of the button
+	// for 1st btn
 	EICRA |= (1 << INT3); // Set for falling edge triggering
 	EIMSK |= (1 << INT3); // Enable INT0
-	sei();				  // enable external interrupts globally
+	// for 2nd btn
+	EICRA |= (1 << INT2);
+	EIMSK |= (1 << INT2);
+	sei(); // enable external interrupts globally
 
 	// setup the LCD
 	DDRG = 0xFF; // set all pins on port G to output
@@ -43,59 +110,6 @@ int main(void)
 		lunch();
 
 		// keypadGate
-		PORTA &= ~(1 << 4);			   // set column 1 to 0
-		if ((PINA & 0b00001000) == 00) // check if row 1 is 1
-		{
-			PORTB = (1 << 0); // display 1
-		}
-		else if ((PINA & 0b00000100) == 00)
-		{
-			PORTB = (1 << 0); // display 4
-		}
-		else if ((PINA & 0b00000010) == 00)
-		{
-			PORTB = (1 << 0); // display 7
-		}
-		else if ((PINA & 0b00000001) == 00)
-		{
-			PORTB = (1 << 0); // display *
-		}
-
-		PORTA &= ~(1 << 5);			   // set column 2 to 0
-		if ((PINA & 0b00001000) == 00) // check if row 1 is 1
-		{
-			PORTB = (1 << 0); // display 2
-		}
-		else if ((PINA & 0b00000100) == 00)
-		{
-			PORTB = (1 << 0); // display 5
-		}
-		else if ((PINA & 0b00000010) == 00)
-		{
-			PORTB = (1 << 0); // display 8
-		}
-		else if ((PINA & 0b00000001) == 00)
-		{
-			PORTB = (1 << 0); // display 0
-		}
-
-		PORTA &= ~(1 << 6);			   // set column 3 to 0
-		if ((PINA & 0b00001000) == 00) // check if row 1 is 1
-		{
-			PORTB = (1 << 0); // display 3
-		}
-		else if ((PINA & 0b00000100) == 00)
-		{
-			PORTB = (1 << 0); // display 6
-		}
-		else if ((PINA & 0b00000010) == 00)
-		{
-			PORTB = (1 << 0); // display 9
-		}
-		else if ((PINA & 0b00000001) == 00)
-		{
-			PORTB = (1 << 0); // display #
-		}
 
 		// keypadFridge
 		PORTB &= ~(1 << 5);				// set column 1 to 0
@@ -180,14 +194,69 @@ void commandMode()
 void displayWelcome()
 {
 	// the loop to display the welcome message
-	for (int i = 0; i < 18; i++)
+	for (int i = 0; i < 17; i++)
 	{
 		dataMode();
 		PORTH = message[i];
 		lunch();
 	}
-	_delay_ms(1500);
+	_delay_ms(500);
 	clearScreen();
+}
+
+void registration()
+{
+	// the loop to do car registration
+	registerCar();
+	_delay_ms(1500);
+	// registerAdults();
+	_delay_ms(1500);
+	// registerChildren();
+	_delay_ms(1500);
+}
+
+// function to do car registration
+void registerCar()
+{
+	int i;
+
+	i = 0;
+
+	while (numberplate[i] != '\0')
+	{
+		dataMode();
+		PORTH = numberplate[i];
+		lunch();
+		i++;
+	}
+
+	// capture the number plate from the keypad
+	int numberPlate = keypadGate();
+	// display the number plate on the LCD
+	commandMode();
+	clearScreen();
+	dataMode();
+	PORTH = "W";
+}
+// function to do adult registration
+void registerAdults()
+{
+	for (int i = 0; i < 24; i++)
+	{
+
+		dataMode();
+		PORTH = numberAdults[i];
+		lunch();
+	}
+}
+void registerChildren()
+{
+	for (int i = 0; i < 26; i++)
+	{
+		dataMode();
+		PORTH = numberChildren[i];
+		lunch();
+	}
 }
 
 // function to rotate the motor
@@ -208,7 +277,12 @@ void clearScreen()
 // do the interrupt service run tine for INT0
 ISR(INT3_vect)
 {
-	// PORTB ^= (1 << 0); // activate the led on an interrupt
-	_delay_ms(50);	  // Delay to denounce the button (if needed)
-	displayWelcome(); // Call the function to display the welcome message
+	PORTB ^= (1 << 0); // activate the led on an interrupt
+	lunch();
+	displayWelcome(); // Call the function to display the welcome messagel
+}
+
+ISR(INT2_vect)
+{
+	registration();
 }
