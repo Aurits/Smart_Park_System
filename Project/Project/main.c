@@ -259,7 +259,7 @@ void clearScreen()
 ISR(INT3_vect)
 {
 	PORTB ^= (1 << 0); // activate the led on an interrupt
-	lunch();
+	_delay_ms(1000);
 	displayWelcome(); // Call the function to display the welcome messagel
 }
 
