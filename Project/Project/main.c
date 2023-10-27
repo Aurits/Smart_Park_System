@@ -194,7 +194,7 @@ void commandMode()
 void displayWelcome()
 {
 	// the loop to display the welcome message
-	for (int i = 0; i < 17; i++)
+	for (int i = 0; i < 18; i++)
 	{
 		dataMode();
 		PORTH = message[i];
@@ -208,7 +208,7 @@ void displayWelcome()
 void registerCar()
 {
 
-	for (int i = 0; i < 22; i++)
+	for (int i = 0; i < 23; i++)
 	{
 		dataMode();
 		PORTH = numberplate[i];
